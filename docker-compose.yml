@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  figma-mcp:
+    build: .
+    ports:
+      - "3333:3333"
+    environment:
+      # You must provide either FIGMA_API_KEY or FIGMA_OAUTH_TOKEN
+      - FIGMA_API_KEY=
+      # - FIGMA_OAUTH_TOKEN=${FIGMA_OAUTH_TOKEN}
+      - PORT=3333
+      - OUTPUT_FORMAT=yaml
+      # Set to "true" to skip image downloads
+      - SKIP_IMAGE_DOWNLOADS=false
+    env_file:
+      - .env
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped
